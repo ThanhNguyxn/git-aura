@@ -246,13 +246,17 @@ class SVGRenderer:
         )
         
         # Color matrix to tint the blur
+        # Format: 20 values for 5x4 matrix (RGBA + offset for each channel)
+        matrix_values = (
+            f"{color.r:.4f} 0 0 0 0 "
+            f"0 {color.g:.4f} 0 0 0 "
+            f"0 0 {color.b:.4f} 0 0 "
+            f"0 0 0 1 0"
+        )
         glow_filter.feColorMatrix(
             in_="blur",
             type="matrix",
-            values=f"{color.r} 0 0 0 0  "
-                   f"0 {color.g} 0 0 0  "
-                   f"0 0 {color.b} 0 0  "
-                   f"0 0 0 1 0",
+            values=matrix_values,
             result="coloredBlur"
         )
         
