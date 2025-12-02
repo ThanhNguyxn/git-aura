@@ -260,10 +260,8 @@ class SVGRenderer:
             result="coloredBlur"
         )
         
-        # Merge original with blur
-        merge = glow_filter.feMerge()
-        merge.feMergeNode(in_="coloredBlur")
-        merge.feMergeNode(in_="SourceGraphic")
+        # Merge original with blur using feMerge with layernames
+        glow_filter.feMerge(layernames=["coloredBlur", "SourceGraphic"])
     
     def add_gradient(
         self,
